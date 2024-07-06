@@ -19,7 +19,10 @@ class JwtFilter(@Autowired val jwtService: JwtService) : OncePerRequestFilter() 
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        if (request.getHeader("Authorization").isNotEmpty()) {
+
+        val header = request.getHeader("Authorization")
+        if (header != null && header.startsWith("Bearer ")) {
+
             val token = request.getHeader(HttpHeaders.AUTHORIZATION).substringAfter("Bearer")
             if (jwtService.validateToken(token)) {
                 val claims = jwtService.extractAllClaims(token)
@@ -41,4 +44,6 @@ class JwtFilter(@Autowired val jwtService: JwtService) : OncePerRequestFilter() 
         }
         filterChain.doFilter(request, response)
     }
+
+
 }
