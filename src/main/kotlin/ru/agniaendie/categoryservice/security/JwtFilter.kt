@@ -39,8 +39,6 @@ class JwtFilter(@Autowired val jwtService: JwtService) : OncePerRequestFilter() 
             } else {
                 throw AuthorizationHeaderUndefinedException("Failed-M")
             }
-        } else {
-            throw AuthorizationHeaderUndefinedException("Failed-U")
         }
         filterChain.doFilter(request, response)
     }
