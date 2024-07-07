@@ -21,7 +21,7 @@ class SecurityConfig(@Autowired val jwtFilter: JwtFilter) {
             .csrf { it.disable() }
             .cors { it.disable() }
             .authorizeHttpRequests { authorize ->
-                authorize.requestMatchers("/api/category/all", "/api/category/get/**").permitAll()
+                authorize.requestMatchers("/api/category/all", "/api/category/get/**","/error").permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)

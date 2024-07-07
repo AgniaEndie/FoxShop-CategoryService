@@ -1,5 +1,5 @@
 package ru.agniaendie.categoryservice.dto
 
 data class CategoryDTO(
-    val uuid: String, val title: String, val hide: Boolean
+    var uuid: String?, var title: String, var hide: Boolean
 )

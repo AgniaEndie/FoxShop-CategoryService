@@ -6,11 +6,13 @@ import jakarta.servlet.http.HttpServletResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import ru.agniaendie.categoryservice.exception.AuthorizationHeaderUndefinedException
 import ru.agniaendie.categoryservice.service.JwtService
+import kotlin.math.log
 
 @Component
 class JwtFilter(@Autowired val jwtService: JwtService) : OncePerRequestFilter() {
@@ -28,7 +30,8 @@ class JwtFilter(@Autowired val jwtService: JwtService) : OncePerRequestFilter() 
                 val claims = jwtService.extractAllClaims(token)
                 val authenticatedUser = UsernamePasswordAuthenticationToken(
                     claims["sub"],
-                    claims["credentials"]
+                    claims["role"],
+                    listOf(SimpleGrantedAuthority(claims["role"] as String)),
                 )
                 val ctx = SecurityContextHolder.getContext()
                 ctx.authentication = authenticatedUser

@@ -12,7 +12,7 @@ class CategoryMapper {
 
     fun fromDTO(categoryDTO: CategoryDTO): Category {
         val category = Category()
-        category.uuid = categoryDTO.uuid
+        category.uuid = categoryDTO.uuid.toString()
         category.title = categoryDTO.title
         category.hide = categoryDTO.hide
         return category
