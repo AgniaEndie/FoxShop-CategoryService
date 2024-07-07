@@ -35,6 +35,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-postgresql")
+
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson

@@ -7,9 +7,9 @@ import java.util.UUID
 
 @Entity
 @Table(name = "category")
-class Category {
+class Category(
     @Id
-    var uuid: String = UUID.randomUUID().toString()
-    var title: String = ""
+    var uuid: String = UUID.randomUUID().toString(),
+    var title: String = "",
     var hide: Boolean = false
-}
+)
