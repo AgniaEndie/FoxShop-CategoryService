@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
+import ru.agniaendie.categoryservice.dto.ErrorDTO
 import ru.agniaendie.categoryservice.exception.AuthorizationHeaderUndefinedException
+import ru.agniaendie.categoryservice.exception.DataNotFoundException
 import ru.agniaendie.categoryservice.exception.JwtValidationFailedException
 
 @ControllerAdvice
@@ -21,5 +23,9 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(JwtValidationFailedException::class)
     fun handleJwtValidationException(ex: JwtValidationFailedException): ResponseEntity<Any> {
         return ResponseEntity(HttpStatus.UNAUTHORIZED)
+    }
+    @ExceptionHandler(DataNotFoundException::class)
+    fun handleDataNotFoundException(ex: DataNotFoundException): ResponseEntity<Any> {
+        return ResponseEntity(ErrorDTO("Category not found"),HttpStatus.NOT_FOUND)
     }
 }

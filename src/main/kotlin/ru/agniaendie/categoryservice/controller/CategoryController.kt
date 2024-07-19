@@ -1,6 +1,8 @@
 package ru.agniaendie.categoryservice.controller
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
 import ru.agniaendie.categoryservice.dto.CategoryDTO
 import ru.agniaendie.categoryservice.dto.ResultRequest
@@ -12,12 +14,13 @@ import ru.agniaendie.categoryservice.service.CategoryService
 @RequestMapping("/api/category")
 class CategoryController(@Autowired val categoryService: CategoryService) {
     @GetMapping("/all")
-    suspend fun getAllCategory(): ResultRequest<List<CategoryDTO>> {
+    suspend fun getAllCategory(): List<CategoryDTO> {
         return categoryService.getAllCategories()
     }
 
     @GetMapping("/get/{id}")
-    fun getCategory(@PathVariable(value = "id") categoryId: String): ResultRequest<CategoryDTO> {
+    @Cacheable(key = "#categoryId", value = ["CategoryDTO"], )
+    fun getCategory(@PathVariable(value = "id") categoryId: String): CategoryDTO {
         return categoryService.getCategory(categoryId)
     }
 
@@ -32,11 +35,12 @@ class CategoryController(@Autowired val categoryService: CategoryService) {
     }
 
     @PutMapping("/update")
-    fun updateCategory(@RequestBody categoryDTO: CategoryDTO): ResultRequest<CategoryDTO> {
+    fun updateCategory(@RequestBody categoryDTO: CategoryDTO): CategoryDTO {
         return categoryService.updateCategory(categoryDTO)
     }
 
     @DeleteMapping("/delete/{id}")
+    @CacheEvict(key = "#categoryId",value = ["CategoryDTO"])
     fun deleteCategory(@PathVariable(value = "id") categoryId: String) {
         return categoryService.deleteCategory(categoryId)
     }
