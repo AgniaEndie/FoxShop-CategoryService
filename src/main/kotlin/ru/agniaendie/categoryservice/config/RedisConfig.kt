@@ -27,12 +27,6 @@ class RedisConfig(
         redisSentinelConfiguration.master(redisProperties.sentinel.master)
         redisProperties.sentinel.nodes.forEach { s -> redisSentinelConfiguration.sentinel(s, redisProperties.port) }
         redisSentinelConfiguration.password = RedisPassword.of(redisProperties.password)
-
-//        val redisStandaloneConfiguration = RedisStandaloneConfiguration()
-//        redisStandaloneConfiguration.hostName = redisHost
-//        redisStandaloneConfiguration.port = redisPort
-
-
         val factory = LettuceConnectionFactory(redisSentinelConfiguration)
         return factory
     }
