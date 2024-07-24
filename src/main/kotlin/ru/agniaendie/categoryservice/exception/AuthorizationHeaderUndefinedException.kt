@@ -1,4 +1,3 @@
 package ru.agniaendie.categoryservice.exception
 
-class AuthorizationHeaderUndefinedException(override val message: String?) : RuntimeException() {
-}
+class AuthorizationHeaderUndefinedException(override val message: String?) : RuntimeException()

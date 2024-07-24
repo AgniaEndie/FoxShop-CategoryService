@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*
 import ru.agniaendie.categoryservice.dto.CategoryDTO
 import ru.agniaendie.categoryservice.dto.ResultRequest
 import ru.agniaendie.categoryservice.entity.Category
-import ru.agniaendie.categoryservice.logger
 import ru.agniaendie.categoryservice.service.CategoryService
 
 @RestController

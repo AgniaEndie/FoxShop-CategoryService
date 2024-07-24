@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import ru.agniaendie.categoryservice.exception.AuthorizationHeaderUndefinedException
 import ru.agniaendie.categoryservice.service.JwtService
-import kotlin.math.log
 
 @Component
 class JwtFilter(@Autowired val jwtService: JwtService) : OncePerRequestFilter() {
